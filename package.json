@@ -9,6 +9,7 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "vue": "^2.6.6",
     "vue-awesome-countdown": "^1.0.12",
     "vue-router": "^3.0.1",
