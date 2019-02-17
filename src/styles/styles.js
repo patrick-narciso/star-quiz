@@ -1,10 +1,22 @@
 import styled from 'vue-styled-components';
 
-export const Container = styled.div`
+const containerProps = { alignH: String, alignV: String};
+export const Container = styled('div', containerProps)`
   display: flex;
   flex: 1;
-  justify-content: center;
-  align-items: center;
+  justify-content: ${props => props.alignH};
+  align-items: ${props => props.alignV};
+`;
+
+export const Header = styled.nav`
+	color: #FFFFFF;
+`;
+
+const headerTextProps = { size: String };
+export const HeaderText = styled('span', headerTextProps)`
+	font-family: 'Star-Jedi';
+	color: #FFFFFF;
+	font-size: ${props => props.size || null}px;
 `;
 
 export const Row = styled.div`
@@ -22,8 +34,10 @@ export const Card = styled.div`
 	box-shadow: 2px 3px 13px -4px rgba(0,0,0,0.75);
 `;
 
-export const Photo = styled.img`
-  max-width: 100px;
+const imageProps = { maxWidth: String, verticalAlign: String};
+export const Photo = styled('img', imageProps)`
+	max-width: ${props => props.maxWidth}px;
+	vertical-align: ${props => props.verticalAlign || null};
 `;
 
 export const CardBody = styled.div`

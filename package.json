@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "vue": "^2.6.6",
+    "vue-awesome-countdown": "^1.0.12",
     "vue-router": "^3.0.1",
     "vue-styled-components": "^1.4.4",
     "vuetify": "^1.5.1",

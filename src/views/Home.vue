@@ -1,10 +1,11 @@
 <template>
-  <Container>
+  <Container alignH="center" alignV="center">
     <Row>
       <Card>
         <Photo 
           src="https://s3-sa-east-1.amazonaws.com/star-quiz/vader.png" 
-          alt="Ícone do Darth Vader">
+          alt="Ícone do Darth Vader"
+          maxWidth="100">
         </Photo>
         <CardTitle>starquiz!</CardTitle>
         <CardBody>

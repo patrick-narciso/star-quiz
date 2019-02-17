@@ -845,7 +845,7 @@
     jest-transform-stub "^1.0.0"
     vue-jest "^3.0.2"
 
-"@vue/cli-service@^3.4.0":
+"@vue/cli-service@^3.2.0", "@vue/cli-service@^3.4.0":
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/@vue/cli-service/-/cli-service-3.4.0.tgz#d2160ee4cf9de8dc4e9d780ccd61cc15862f2950"
   integrity sha512-AtLiin5Jlw0ULKXJtBhUaykz0VzDgYq2RCf7nxfB7Vsi5fTbJyOVeWYe9KsnsM6VTRBWRUI8NzPPMYxV2uxtQA==
@@ -9565,6 +9565,14 @@ vm-browserify@0.0.4:
   integrity sha1-XX6kW7755Kb/ZflUOOCofDV9WnM=
   dependencies:
     indexof "0.0.1"
+
+vue-awesome-countdown@^1.0.12:
+  version "1.0.12"
+  resolved "https://registry.yarnpkg.com/vue-awesome-countdown/-/vue-awesome-countdown-1.0.12.tgz#783ad6262b7da3858bb470cc013f25abf1cba3af"
+  integrity sha512-sqdXLmBE6iwYX8HJjKYvpDpvADTFScgI26on40V2m1ofrFNpRNmnyIBOsOwdaeExMmkfLNlbUrGcz6h+wrYZOg==
+  dependencies:
+    "@vue/cli-service" "^3.2.0"
+    vue-template-compiler "^2.5.21"
 
 vue-eslint-parser@^2.0.3:
   version "2.0.3"
