@@ -1,0 +1,47 @@
+@import "functions";
+
+/* ===========================
+//COLORS
+===========================*/
+
+$color-background: #000;
+$box-shadow-primary: rgba(0,0,0,0.5);
+$box-shadow-secondary: rgba(255,255,255,0.5);
+$box-shadow-terciary: rgba(0,0,0,0.75);
+$background-button: #F00;
+$background-card: #CC3843;
+$font-body: #FFF;
+
+/* ===========================
+//EFFECTS
+===========================*/
+
+$transition: all 0.1s ease;
+$box-shadow-button: inset 0 -5px 20px $box-shadow-primary,
+             inset 0 15px 20px $box-shadow-secondary,
+             0 5px 10px $box-shadow-terciary,
+             0 10px 10px $box-shadow-primary;
+$box-shadow-button-before: inset 0 7px 15px $box-shadow-secondary, inset 0 -7px 15px $box-shadow-primary;
+$box-shadow-button-active: inset 0 0 20px $box-shadow-primary;
+
+/* ===========================
+//ELEMENTS
+===========================*/
+
+$box-sizing: border-box;
+
+/* ===========================
+//SHADOW BACKGROUND
+===========================*/
+
+$shadows-stars: multiple-box-shadow(700);
+
+/* ===========================
+//BREAKPOINTS
+===========================*/
+
+$screen-xs: 480px;
+$screen-sm: 576px;
+$screen-md: 768px;
+$screen-lg: 979px;
+$screen-xl: 1200px;

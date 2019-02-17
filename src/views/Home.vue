@@ -1,18 +1,49 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <Container>
+    <Row>
+      <Card>
+        <Photo 
+          src="https://s3-sa-east-1.amazonaws.com/star-quiz/vader.png" 
+          alt="Ícone do Darth Vader">
+        </Photo>
+        <CardTitle>starquiz!</CardTitle>
+        <CardBody>
+          <CardText size="12">Bem-Vindo grande Padawan!</CardText> 
+          <CardText size="12">Com esse quiz você terá oportunidade de identificar os principais personagens de Star- wars, marcar pontos e se tornar um expert nesta série de filmes maravilhosa!</CardText>
+        </CardBody>
+        <BtnAction>
+          <CardText size="16" animate>Jogar</CardText>
+        </BtnAction>
+      </Card>
+    </Row>
+  </Container>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import { 
+  Container, 
+  Row, 
+  Card, 
+  CardTitle, 
+  Photo, 
+  CardBody, 
+  CardText, 
+  BtnAction } from '@/styles/styles.js';
 
 export default {
   name: 'home',
   components: {
-    HelloWorld
+    Container,
+    Row,
+    Card,
+    Photo,
+    CardTitle,
+    CardText,
+    Text,
+    CardBody,
+    BtnAction
   }
 }
 </script>
+

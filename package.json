@@ -9,8 +9,10 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
-    "vue": "^2.5.22",
+    "vue": "^2.6.6",
     "vue-router": "^3.0.1",
+    "vue-styled-components": "^1.4.4",
+    "vuetify": "^1.5.1",
     "vuex": "^3.0.1"
   },
   "devDependencies": {

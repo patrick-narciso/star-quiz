@@ -1,0 +1,42 @@
+@import '../_variables';
+
+%box-shadow {
+  -webkit-box-shadow: $box-shadow-button;
+  box-shadow: $box-shadow-button;
+}
+
+%box-shadow-active {
+   -webkit-box-shadow: $box-shadow-button-active;
+   box-shadow: $box-shadow-button-active;
+ }
+
+%box-shadow-before {
+  -webkit-box-shadow: $box-shadow-button-before;
+  box-shadow: $box-shadow-button-before;
+}
+
+%button-transition {
+  -webkit-transition: $transition;
+  -moz-transition: $transition;
+  -o-transition: $transition;
+  -ms-transition: $transition;
+  transition: $transition;
+}
+
+%box-sizing {
+  -webkit-box-sizing: $box-sizing;
+  -moz-box-sizing: $box-sizing;
+  box-sizing: $box-sizing;
+}
+
+%border-radius {
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+}
+
+%flexbox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+}
