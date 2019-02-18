@@ -5,7 +5,8 @@ export const Container = styled('div', containerProps)`
   display: flex;
   flex: 1;
   justify-content: ${props => props.alignH};
-  align-items: ${props => props.alignV};
+	align-items: ${props => props.alignV};
+	flex-flow: row wrap;
 `;
 
 export const Header = styled.nav`
@@ -24,19 +25,22 @@ export const Row = styled.div`
   align-items: center;
 `;
 
-export const Card = styled.div`
+const cardProps = { width: String, mt: String };
+export const Card = styled('div', cardProps)`
   background-color: #FFFFFF;
-  width: 70vw;
-  height: auto;
+  width: ${props => props.width || null};
+	height: auto;
+	margin-top: ${props => props.mt}px;
 	border-radius: 4px;
 	-webkit-box-shadow: 2px 3px 13px -4px rgba(0,0,0,0.75);
 	-moz-box-shadow: 2px 3px 13px -4px rgba(0,0,0,0.75);
 	box-shadow: 2px 3px 13px -4px rgba(0,0,0,0.75);
 `;
 
-const imageProps = { maxWidth: String, verticalAlign: String};
+const imageProps = { maxWidth: String, verticalAlign: String, width: String};
 export const Photo = styled('img', imageProps)`
-	max-width: ${props => props.maxWidth}px;
+	width: ${props => props.width || null};
+	max-width: ${props => props.maxWidth};
 	vertical-align: ${props => props.verticalAlign || null};
 `;
 
@@ -45,7 +49,6 @@ export const CardBody = styled.div`
 `;
 
 const cardTextProps = { size: String, animate: Boolean };
-
 export const CardText = styled('p', cardTextProps)`
   margin: 5px;
   line-height: 1.6;
@@ -53,31 +56,37 @@ export const CardText = styled('p', cardTextProps)`
 	animation: ${props => props.animate ? 'blinker 1s linear infinite' : null};
 `;
 
-export const BtnAction = styled.button`
-	width: 200px;
+export const CardInput = styled.input`
+	width: 80%;
+	border-radius: 4px;
+	font-family: 'game-over';
+	outline: 0;
+	height: 25px;
+	background: bisque;
+	box-shadow: 0px 3px 16px 0px rgba(0,0,0,0.75);
+`;
+
+const buttonProps = { width: String, height: String, primary: Boolean, mt: String, mb: String };
+export const BtnAction = styled('button', buttonProps)`
+	width: ${props => props.width || 200}px;
+	height: ${props => props.height || null}px;
+	margin-top: ${props => props.mt || null}px !important;
+	margin-bottom: ${props => props.mb || null}px !important;
 	color: #FFF;
 	font-family: 'game-over';
 	text-decoration: none;
 	outline: 0;
 	margin: 0 auto;
 	border-radius: 5px;
-	border: solid 1px #D94E3B;
-	background: #cb3b27;
+	border: solid 1px ${props => props.primary ? '#cb3b27' : '#f3a200'};
+	background: ${props => props.primary ? '#cb3b27' : '#f3a200'};
 	text-align: center;
 	padding: 20px 30px;
-
-	-webkit-transition: all 0.1s;
-	-moz-transition: all 0.1s;
 	transition: all 0.1s;
-
-	-webkit-box-shadow: 0px 9px 0px #84261a;
-	-moz-box-shadow: 0px 9px 0px #84261a;
-	box-shadow: 0px 9px 0px #84261a;
+	box-shadow: 0px 9px 0px ${props => props.primary ? '#84261a' : '#a97f34'};
 
 	&:active {
-		-webkit-box-shadow: 0px 2px 0px #84261a;
-    -moz-box-shadow: 0px 2px 0px #84261a;
-    box-shadow: 0px 2px 0px #84261a;
+    box-shadow: 0px 2px 0px ${props => props.primary ? '#84261a' : '#b98d2b'};
     position:relative;
     top:7px;
 	}
