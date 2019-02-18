@@ -21,7 +21,7 @@
       </HeaderText>
     </Container>
     <Container alignH="space-around" alignV="center">
-      <Card v-bind:key="char.name" v-for="char in chars" width="300px" mt="10">
+      <Card v-bind:key="char.name" v-for="(char, i) in chars" width="300px" mt="10">
         <Photo 
           :src="char.url | charImage"
           alt="Foto do Personagem"
@@ -38,8 +38,8 @@
             <CardText size="12">Movies:</CardText>
             <CardText size="12">Vehicles:</CardText>
           </div>
-          <CardInput type="text" id="char.name" v-model="charName"/>
-          <BtnAction v-on:click="verifyChar(char.name)" primary mt="10" width="186" height="56">
+          <CardInput type="text" id="char.name" v-model="charName[i]"/>
+          <BtnAction v-on:click="isChar(char.name, i)" primary mt="10" width="186" height="56">
             <CardText size="16">Eu Sei!</CardText>
           </BtnAction>
           <BtnAction v-on:click="getInfo(char)" mt="15" mb="15" width="186" height="56">
@@ -73,7 +73,7 @@ export default {
   name: 'game',
   data () {
     return {
-      charName: ''
+      charName: {}
     }
   },
   components: {
@@ -103,8 +103,8 @@ export default {
     ...mapActions ({
       saveMovies: 'SET_MOVIES'
     }),
-    verifyChar(char) {
-      // console.log(this.charName.toLowerCase() === name.toLowerCase());
+    isChar(name, index) {
+      return name.toLowerCase() === this.charName[index].toLowerCase();
     },
     getInfo(char) {
       Promise.all(char.films.map(film => axios.get(film)))
