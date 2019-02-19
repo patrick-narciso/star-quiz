@@ -10,7 +10,7 @@
         <HeaderText size="30">starquiz!</HeaderText>
       </Header>	
       <HeaderText size="30">Tempo: 
-        <countdown :left-time="120000">
+        <countdown v-on:onFinish="timeLeft = 0" :left-time="12000">
           <span
             slot="process"
             slot-scope="{ timeObj }">
@@ -20,8 +20,15 @@
         </countdown>
       </HeaderText>
     </Container>
-    <Container alignH="space-around" alignV="center">
-      <Card v-bind:key="person.name" v-for="(person, i) in chars" width="300px" mt="10">
+    <Container 
+          v-show="timeLeft !== 0"
+          alignH="space-around" 
+          alignV="center">
+      <Card 
+          v-bind:key="person.name" 
+          v-for="(person, i) in chars" 
+          width="300px" 
+          mt="10">
         <Photo 
           :src="person.url | charImage"
           alt="Foto do Personagem"
@@ -48,12 +55,23 @@
         </CardBody>
       </Card>
     </Container>
-    <BtnAction v-on:click="previousPage()" mt="15" mb="15" width="186" height="56">
-      Anterior
-    </BtnAction>
-    <BtnAction v-on:click="nextPage()" mt="15" mb="15" ml="15" width="186" height="56" primary>
-      Próximo
-    </BtnAction>
+    <EndGame v-show="timeLeft === 0"/>
+    <BtnAction
+        v-show="timeLeft !== 0" 
+        v-on:click="previousPage()" 
+        mt="15" 
+        mb="15" 
+        width="186" 
+        height="56">Anterior</BtnAction>
+    <BtnAction
+        v-show="timeLeft !== 0" 
+        v-on:click="nextPage()" 
+        mt="15" 
+        mb="15" 
+        ml="15" 
+        width="186" 
+        height="56" 
+        primary>Próximo</BtnAction>
   </div>
 </template>
 
@@ -71,6 +89,7 @@ import {
   BtnAction 
   } from '@/styles/styles.js';
 import { getChars, getDetails } from '@/api/people.js';
+import EndGame from '@/views/EndGame.vue';
 import axios from 'axios';
 import { mapActions } from 'vuex';
 
@@ -79,7 +98,8 @@ export default {
   data () {
     return {
       charName: {},
-      disabled: {}
+      disabled: {},
+      timeLeft: ''
     }
   },
   components: {
@@ -90,7 +110,8 @@ export default {
     CardBody,
     CardInput,
     Header,
-    HeaderText, 
+    HeaderText,
+    EndGame, 
     Photo, 
     BtnAction 
   },
@@ -191,8 +212,7 @@ export default {
         this.savePeople(chars.results);
       })
       .catch(err => console.log(err));
-    }
+    },
   }
 }
 </script>
-

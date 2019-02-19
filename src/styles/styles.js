@@ -3,7 +3,8 @@ import styled from 'vue-styled-components';
 const containerProps = { alignH: String, alignV: String};
 export const Container = styled('div', containerProps)`
   display: flex;
-  flex: 1;
+	flex: 1;
+	width: 100vw;
   justify-content: ${props => props.alignH};
 	align-items: ${props => props.alignV};
 	flex-flow: row wrap;
