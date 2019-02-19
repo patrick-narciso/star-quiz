@@ -98,16 +98,34 @@ export default {
   },
   methods: {
     ...mapActions ({
-      savePeople: 'SET_PEOPLE'
-    }),
-    ...mapActions ({
-      saveMovies: 'SET_MOVIES'
+      savePeople: 'SET_PEOPLE',
+      saveMovies: 'SET_MOVIES',
+      saveVehicles: 'SET_VEHICLES',
+      savePlanet: 'SET_PLANET',
+      saveSpecie: 'SET_SPECIE',
+      saveChar: 'SET_CHAR',
+      resetChar: 'RESET_CHAR'
     }),
     isChar(name, index) {
       return name.toLowerCase() === this.charName[index].toLowerCase();
     },
+    setCharData(data, char) {
+      this.saveChar(char);
+      if (data.url.indexOf('films') > -1){
+        this.saveMovies(data);
+      } else if (data.url.indexOf('species') > -1) {
+        this.saveSpecie(data);
+      } else if (data.url.indexOf('vehicles') > -1) {
+        this.saveVehicles(data);
+      } else if (data.url.indexOf('planets') > -1) {
+        this.savePlanet(data);
+      }
+    },
     getInfo(char) {
-      return getDetails(char).then(res => console.log(res)).catch(err => console.log(err));
+      return getDetails(char).then(response => {
+        this.resetChar();
+        response.map(res => this.setCharData(res.data, char));
+      }).catch(err => console.log(err));
     },
     getPeople() {
       return getChars(this.$route.params.id).then(chars => {

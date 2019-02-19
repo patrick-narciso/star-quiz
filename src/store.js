@@ -6,14 +6,15 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     people: [],
-    movies: [],
-    vehicles: [],
+    score: '',
     char: {
       name: '',
-      specie: '',
+      specie: [],
       height: '',
       hair: '',
-      planet: ''
+      planet: '',
+      movies: [],
+      vehicles: []
     },
   },
   mutations: {
@@ -21,22 +22,41 @@ export default new Vuex.Store({
       state.people = payload;
     },
     SET_MOVIES(state, payload) {
-      state.movies.push(payload);
+      state.char.movies.push(payload);
     },
     SET_VEHICLES(state, payload) {
-      state.vehicles = payload;
+      state.char.vehicles.push(payload);
+    },
+    SET_PLANET(state, payload) {
+      state.char.planet = payload;
+    },
+    SET_SPECIE(state, payload) {
+      state.char.specie.push(payload);
     },
     SET_CHAR(state, payload) {
-      state.char.specie = payload.specie;
       state.char.height = payload.height;
-      state.char.hair = payload.hair;
-      state.char.planet = payload.planet;
+      state.char.hair = payload.hair_color;
       state.char.name = payload.name;
+    },
+    RESET_CHAR(state) {
+      state.char.name = '',
+      state.char.specie = [],
+      state.char.height = '',
+      state.char.hair = '',
+      state.char.planet = '',
+      state.char.movies = [],
+      state.char.vehicles = []
     }
   },
   actions: {
     SET_PEOPLE(context, payload) {
       context.commit('SET_PEOPLE', payload);
+    },
+    SET_SPECIE(context, payload) {
+      context.commit('SET_SPECIE', payload);
+    },
+    SET_PLANET(context, payload) {
+      context.commit('SET_PLANET', payload);
     },
     SET_MOVIES(context, payload) {
       context.commit('SET_MOVIES', payload);
@@ -46,6 +66,9 @@ export default new Vuex.Store({
     },
     SET_CHAR(context, payload) {
       context.commit('SET_CHAR', payload);
+    },
+    RESET_CHAR(context) {
+      context.commit('RESET_CHAR');
     }
   }
 })
