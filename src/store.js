@@ -7,6 +7,8 @@ export default new Vuex.Store({
   state: {
     people: [],
     score: 0,
+    previousPage: null,
+    nextPage: null,
     char: {
       name: '',
       specie: [],
@@ -45,6 +47,12 @@ export default new Vuex.Store({
     SET_SCORE(state, payload) {
       state.score = payload;
     },
+    SET_PREVIOUS(state, payload) {
+      state.previousPage = payload;
+    },
+    SET_NEXT(state, payload) {
+      state.nextPage = payload;
+    },
     RESET_CHAR(state) {
       state.char.name = '',
       state.char.specie = [],
@@ -79,6 +87,12 @@ export default new Vuex.Store({
     },
     SET_SCORE(context, payload) {
       context.commit('SET_SCORE', payload);
+    },
+    SET_PREVIOUS(context, payload) {
+      context.commit('SET_PREVIOUS', payload);
+    },
+    SET_NEXT(context, payload) {
+      context.commit('SET_NEXT', payload);
     },
     RESET_CHAR(context) {
       context.commit('RESET_CHAR');

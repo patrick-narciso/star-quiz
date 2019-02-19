@@ -66,12 +66,13 @@ export const CardInput = styled.input`
 	box-shadow: 0px 3px 16px 0px rgba(0,0,0,0.75);
 `;
 
-const buttonProps = { width: String, height: String, primary: Boolean, mt: String, mb: String };
+const buttonProps = { width: String, height: String, primary: Boolean, mt: String, mb: String, ml: String};
 export const BtnAction = styled('button', buttonProps)`
 	width: ${props => props.width || 200}px;
 	height: ${props => props.height || null}px;
 	margin-top: ${props => props.mt || null}px !important;
 	margin-bottom: ${props => props.mb || null}px !important;
+	margin-left: ${props => props.ml || null}px !important;
 	color: #FFF;
 	font-family: 'game-over';
 	text-decoration: none;

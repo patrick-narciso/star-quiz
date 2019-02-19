@@ -40,6 +40,12 @@
         </CardBody>
       </Card>
     </Container>
+    <BtnAction v-on:click="previousPage()" mt="15" mb="15" width="186" height="56">
+      Anterior
+    </BtnAction>
+    <BtnAction v-on:click="nextPage()" mt="15" mb="15" ml="15" width="186" height="56" primary>
+      Próximo
+    </BtnAction>
   </div>
 </template>
 
@@ -89,6 +95,12 @@ export default {
     },
     score () {
       return this.$store.state.score;
+    },
+    previous() {
+      return this.$store.state.previousPage;
+    },
+    next() {
+      return this.$store.state.nextPage;
     }
   },
   mounted () {
@@ -104,8 +116,23 @@ export default {
       saveChar: 'SET_CHAR',
       resetChar: 'RESET_CHAR',
       saveClicked: 'SET_CLICKED',
-      saveScore: 'SET_SCORE'
+      saveScore: 'SET_SCORE',
+      saveNextPage: 'SET_NEXT',
+      savePreviousPage: 'SET_PREVIOUS',
     }),
+    previousPage() {
+      if (this.previous !== null) {
+        const pageId = this.previous[this.previous.length - 1];
+        this.getPeople(pageId);
+      }
+    },
+    nextPage() {
+      console.log(this.next);
+      if (this.next !== null) {
+        const pageId = this.next[this.next.length - 1];
+        this.getPeople(pageId);
+      }
+    },
     isChar(name, index) {
       this.disabled[index] = true;
       if(name.toLowerCase() === this.charName[index].toLowerCase()) {
@@ -135,8 +162,10 @@ export default {
         response.map(res => this.setCharData(res.data, char));
       }).catch(err => console.log(err));
     },
-    getPeople() {
-      return getChars(this.$route.params.id).then(chars => {
+    getPeople(pageId) {
+      return getChars(pageId || this.$route.params.id).then(chars => {
+        this.savePreviousPage(chars.previous);
+        this.saveNextPage(chars.next);
         this.savePeople(chars.results);
       })
       .catch(err => console.log(err));
