@@ -10,7 +10,7 @@
         <HeaderText size="30">starquiz!</HeaderText>
       </Header>	
       <HeaderText size="30">Tempo: 
-        <countdown v-on:onFinish="timeLeft = 0" :left-time="12000">
+        <countdown v-on:onFinish="timeLeft = 0" :left-time="120000">
           <span
             slot="process"
             slot-scope="{ timeObj }">
@@ -21,7 +21,7 @@
       </HeaderText>
     </Container>
     <Container 
-          v-show="timeLeft !== 0"
+          v-show="timeLeft !== 0 && !loading"
           alignH="space-around" 
           alignV="center">
       <Card 
@@ -57,14 +57,14 @@
     </Container>
     <EndGame v-show="timeLeft === 0"/>
     <BtnAction
-        v-show="timeLeft !== 0" 
+        v-show="timeLeft !== 0 && !loading" 
         v-on:click="previousPage()" 
         mt="15" 
         mb="15" 
         width="186" 
         height="56">Anterior</BtnAction>
     <BtnAction
-        v-show="timeLeft !== 0" 
+        v-show="timeLeft !== 0 && !loading" 
         v-on:click="nextPage()" 
         mt="15" 
         mb="15" 
@@ -72,6 +72,7 @@
         width="186" 
         height="56" 
         primary>Próximo</BtnAction>
+    <Loading v-show="loading"></Loading>   
   </div>
 </template>
 
@@ -90,6 +91,7 @@ import {
   } from '@/styles/styles.js';
 import { getChars, getDetails } from '@/api/people.js';
 import EndGame from '@/views/EndGame.vue';
+import Loading from '@/components/Loading.vue';
 import axios from 'axios';
 import { mapActions } from 'vuex';
 
@@ -99,7 +101,8 @@ export default {
     return {
       charName: {},
       disabled: {},
-      timeLeft: ''
+      timeLeft: '',
+      loading: false
     }
   },
   components: {
@@ -111,7 +114,8 @@ export default {
     CardInput,
     Header,
     HeaderText,
-    EndGame, 
+    EndGame,
+    Loading, 
     Photo, 
     BtnAction 
   },
@@ -199,19 +203,24 @@ export default {
       }
     },
     getInfo(char) {
+      this.loading = true;
       return getDetails(char).then(response => {
         this.resetChar();
         this.saveClicked(true);
         response.map(res => this.setCharData(res.data, char));
-      }).catch(err => console.log(err));
+      })
+      .catch(err => console.log(err))
+      .finally(() => this.loading = false);
     },
     getPeople(pageId) {
+      this.loading = true;
       return getChars(pageId || this.$route.params.id).then(chars => {
         this.savePreviousPage(chars.previous);
         this.saveNextPage(chars.next);
         this.savePeople(chars.results);
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err))
+      .finally(() => this.loading = false);
     },
   }
 }
