@@ -4,11 +4,11 @@ import router from './router'
 import store from './store'
 import './filters/charImage'
 import vueAwesomeCountdown from 'vue-awesome-countdown'
-import VModal from 'vue-js-modal'
+import VueSweetalert2 from 'vue-sweetalert2'
 
 Vue.config.productionTip = false
 Vue.use(vueAwesomeCountdown, 'vac')
-Vue.use(VModal, { dynamic: true })
+Vue.use(VueSweetalert2)
 
 new Vue({
   router,
