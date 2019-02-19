@@ -30,7 +30,7 @@
         </Photo>
         <CardTitle>quem é?</CardTitle>
         <CardBody>
-          <CardInput type="text" id="char.name" v-model="charName[i]"/>
+          <CardInput :disabled="disabled[i]" type="text" id="char.name" v-model="charName[i]"/>
           <BtnAction v-on:click="isChar(char.name, i)" primary mt="10" width="186" height="56">
             <CardText size="16">Eu Sei!</CardText>
           </BtnAction>
@@ -40,7 +40,6 @@
         </CardBody>
       </Card>
     </Container>
-    <modal name="teste"></modal>
   </div>
 </template>
 
@@ -65,7 +64,8 @@ export default {
   name: 'game',
   data () {
     return {
-      charName: {}
+      charName: {},
+      disabled: {}
     }
   },
   components: {
@@ -83,6 +83,12 @@ export default {
   computed: {
     chars () {
       return this.$store.state.people;
+    },
+    char () {
+      return this.$store.state.char;
+    },
+    score () {
+      return this.$store.state.score;
     }
   },
   mounted () {
@@ -96,10 +102,19 @@ export default {
       savePlanet: 'SET_PLANET',
       saveSpecie: 'SET_SPECIE',
       saveChar: 'SET_CHAR',
-      resetChar: 'RESET_CHAR'
+      resetChar: 'RESET_CHAR',
+      saveClicked: 'SET_CLICKED',
+      saveScore: 'SET_SCORE'
     }),
     isChar(name, index) {
-      return name.toLowerCase() === this.charName[index].toLowerCase();
+      this.disabled[index] = true;
+      if(name.toLowerCase() === this.charName[index].toLowerCase()) {
+        this.char.name === name && this.char.clicked ?
+          this.saveScore(this.score + 5) : this.saveScore(this.score + 10);
+        this.$swal('Você acertou!', 'Continue jogando para acertar mais', 'success');
+      } else {
+        this.$swal('Você errou!', 'Tente acertar outros personagens', 'error');
+      }
     },
     setCharData(data, char) {
       this.saveChar(char);
@@ -116,6 +131,7 @@ export default {
     getInfo(char) {
       return getDetails(char).then(response => {
         this.resetChar();
+        this.saveClicked(true);
         response.map(res => this.setCharData(res.data, char));
       }).catch(err => console.log(err));
     },

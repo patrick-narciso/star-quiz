@@ -6,7 +6,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     people: [],
-    score: '',
+    score: 0,
     char: {
       name: '',
       specie: [],
@@ -14,7 +14,8 @@ export default new Vuex.Store({
       hair: '',
       planet: '',
       movies: [],
-      vehicles: []
+      vehicles: [],
+      clicked: false
     },
   },
   mutations: {
@@ -37,6 +38,12 @@ export default new Vuex.Store({
       state.char.height = payload.height;
       state.char.hair = payload.hair_color;
       state.char.name = payload.name;
+    },
+    SET_CLICKED(state, payload) {
+      state.char.clicked = payload;
+    },
+    SET_SCORE(state, payload) {
+      state.score = payload;
     },
     RESET_CHAR(state) {
       state.char.name = '',
@@ -66,6 +73,12 @@ export default new Vuex.Store({
     },
     SET_CHAR(context, payload) {
       context.commit('SET_CHAR', payload);
+    },
+    SET_CLICKED(context, payload) {
+      context.commit('SET_CLICKED', payload);
+    },
+    SET_SCORE(context, payload) {
+      context.commit('SET_SCORE', payload);
     },
     RESET_CHAR(context) {
       context.commit('RESET_CHAR');
