@@ -56,11 +56,13 @@ export const CardText = styled('p', cardTextProps)`
 	animation: ${props => props.animate ? 'blinker 1s linear infinite' : null};
 `;
 
-export const CardInput = styled.input`
+const inputProps = { margin: String }
+export const CardInput = styled('input', inputProps)`
 	width: 80%;
 	border-radius: 4px;
 	font-family: 'game-over';
 	outline: 0;
+	margin: ${props => props.margin}px;
 	height: 25px;
 	background: bisque;
 	box-shadow: 0px 3px 16px 0px rgba(0,0,0,0.75);

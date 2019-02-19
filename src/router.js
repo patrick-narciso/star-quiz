@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Game from './views/Game.vue'
+import EndGame from './views/EndGame.vue'
 
 Vue.use(Router)
 
@@ -16,6 +17,11 @@ export default new Router({
       path: '/game/:id',
       name: 'game',
       component: Game
+    },
+    {
+      path: '/final',
+      name: 'end-game',
+      component: EndGame
     }
   ]
 })
