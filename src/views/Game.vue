@@ -65,7 +65,7 @@ import {
   Photo, 
   BtnAction 
   } from '@/styles/styles.js';
-import people from '@/api/people.js';
+import { getChars, getDetails } from '@/api/people.js';
 import axios from 'axios';
 import { mapActions } from 'vuex';
 
@@ -94,7 +94,7 @@ export default {
     }
   },
   mounted () {
-    this.getChars();
+    this.getPeople();
   },
   methods: {
     ...mapActions ({
@@ -107,11 +107,10 @@ export default {
       return name.toLowerCase() === this.charName[index].toLowerCase();
     },
     getInfo(char) {
-      Promise.all(char.films.map(film => axios.get(film)))
-      .then(res => res.map(movie => this.saveMovies(movie.data.title)));
+      return getDetails(char).then(res => console.log(res)).catch(err => console.log(err));
     },
-    getChars() {
-      return people.getChars(this.$route.params.id).then(chars => {
+    getPeople() {
+      return getChars(this.$route.params.id).then(chars => {
         this.savePeople(chars.results);
       })
       .catch(err => console.log(err));
