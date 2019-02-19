@@ -21,20 +21,28 @@
       </HeaderText>
     </Container>
     <Container alignH="space-around" alignV="center">
-      <Card v-bind:key="char.name" v-for="(char, i) in chars" width="300px" mt="10">
+      <Card v-bind:key="person.name" v-for="(person, i) in chars" width="300px" mt="10">
         <Photo 
-          :src="char.url | charImage"
+          :src="person.url | charImage"
           alt="Foto do Personagem"
           width="300px"
           maxWidth="100%">
         </Photo>
         <CardTitle>quem é?</CardTitle>
         <CardBody>
+          <div v-show="char.clicked && person.name === char.name">
+            <CardText size="12">Specie: {{ getCharData().spcie }}</CardText>
+            <CardText size="12">Height: {{ person.height }}</CardText>
+            <CardText size="12">Hair: {{ person.hair_color }}</CardText>
+            <CardText size="12">Planet: {{ getCharData().planet }}</CardText>
+            <CardText size="12">Movies: {{ getCharData().films }}</CardText>
+            <CardText size="12">Vehicles: {{ getCharData().vehicles }}</CardText>
+          </div>
           <CardInput :disabled="disabled[i]" type="text" id="char.name" v-model="charName[i]"/>
-          <BtnAction v-on:click="isChar(char.name, i)" primary mt="10" width="186" height="56">
+          <BtnAction v-on:click="isChar(person.name, i)" primary mt="10" width="186" height="56">
             <CardText size="16">Eu Sei!</CardText>
           </BtnAction>
-          <BtnAction v-on:click="getInfo(char)" mt="15" mb="15" width="186" height="56">
+          <BtnAction v-on:click="getInfo(person)" mt="15" mb="15" width="186" height="56">
             <CardText size="16">Dicas...</CardText>
           </BtnAction>
         </CardBody>
@@ -127,7 +135,6 @@ export default {
       }
     },
     nextPage() {
-      console.log(this.next);
       if (this.next !== null) {
         const pageId = this.next[this.next.length - 1];
         this.getPeople(pageId);
@@ -142,6 +149,21 @@ export default {
       } else {
         this.$swal('Você errou!', 'Tente acertar outros personagens', 'error');
       }
+    },
+    getCharData() {
+      let films = '';
+      let vehicles = '';
+      let spcie = '';
+      this.char.movies.map(movie => films += movie.title + ', ');
+      this.char.vehicles.map(vehicle => vehicles += vehicle.name + ', ');
+      this.char.specie.map(spc => spcie += spc.name + ', ');
+
+      return {
+        films,
+        vehicles,
+        spcie,
+        planet: this.char.planet.name
+      };
     },
     setCharData(data, char) {
       this.saveChar(char);
