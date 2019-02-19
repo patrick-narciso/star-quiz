@@ -30,20 +30,12 @@
         </Photo>
         <CardTitle>quem é?</CardTitle>
         <CardBody>
-          <div>
-            <CardText size="12">Specie: </CardText>
-            <CardText size="12">Height: {{ char.height }}</CardText>
-            <CardText size="12">Hair: {{ char.hair_color }}</CardText>
-            <CardText size="12">Planet:</CardText>
-            <CardText size="12">Movies:</CardText>
-            <CardText size="12">Vehicles:</CardText>
-          </div>
           <CardInput type="text" id="char.name" v-model="charName[i]"/>
           <BtnAction v-on:click="isChar(char.name, i)" primary mt="10" width="186" height="56">
             <CardText size="16">Eu Sei!</CardText>
           </BtnAction>
           <BtnAction v-on:click="getInfo(char)" mt="15" mb="15" width="186" height="56">
-            <CardText size="16">Dúvidas..</CardText>
+            <CardText size="16">Dicas...</CardText>
           </BtnAction>
         </CardBody>
       </Card>
