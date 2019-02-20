@@ -26,7 +26,8 @@
           alignV="center">
       <Card 
           v-bind:key="person.name" 
-          v-for="(person, i) in chars" 
+          v-for="(person, i) in chars"
+          v-bind:ref="'card' + i" 
           width="300px" 
           mt="10">
         <Photo 
@@ -45,7 +46,7 @@
             <CardText size="12">Movies: {{ getCharData().films }}</CardText>
             <CardText size="12">Vehicles: {{ getCharData().vehicles }}</CardText>
           </div>
-          <CardInput :disabled="disabled[i]" type="text" id="char.name" v-model="charName[i]"/>
+          <CardInput type="text" id="char.name" v-model="charName[i]"/>
           <BtnAction v-on:click="isChar(person.name, i)" primary mt="10" width="186" height="56">
             <CardText size="16">Eu Sei!</CardText>
           </BtnAction>
@@ -100,7 +101,6 @@ export default {
   data () {
     return {
       charName: {},
-      disabled: {},
       timeLeft: '',
       loading: false
     }
@@ -165,15 +165,19 @@ export default {
         this.getPeople(pageId);
       }
     },
+    removeCharFromList(id) {
+      this.chars.splice(id, 1);
+      this.charName = {};
+    },
     isChar(name, index) {
-      this.disabled[index] = true;
-      if(name.toLowerCase() === this.charName[index].toLowerCase()) {
+      if(name && name.toLowerCase() === this.charName[index].toLowerCase()) {
         this.char.name === name && this.char.clicked ?
           this.saveScore(this.score + 5) : this.saveScore(this.score + 10);
         this.$swal('Você acertou!', 'Continue jogando para acertar mais', 'success');
       } else {
         this.$swal('Você errou!', 'Tente acertar outros personagens', 'error');
       }
+      this.removeCharFromList(index);
     },
     getCharData() {
       let films = '';
@@ -209,7 +213,7 @@ export default {
         this.saveClicked(true);
         response.map(res => this.setCharData(res.data, char));
       })
-      .catch(err => console.log(err))
+      .catch(err => err)
       .finally(() => this.loading = false);
     },
     getPeople(pageId) {
@@ -219,7 +223,7 @@ export default {
         this.saveNextPage(chars.next);
         this.savePeople(chars.results);
       })
-      .catch(err => console.log(err))
+      .catch(err => err)
       .finally(() => this.loading = false);
     },
   }
