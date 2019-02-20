@@ -8,7 +8,7 @@
 					<CardInput id="name" type="text" placeholder="Nome" margin="10" v-model="name"/>
 					<CardInput id="email" type="email" placeholder="E-mail" margin="10" v-model="email"/>
           <BtnAction primary mt="10" width="186" height="56">
-            <CardText size="16" v-on:click="validForm()">Salvar</CardText>
+            <CardText size="16" @click="validForm()">Salvar</CardText>
           </BtnAction>
         </CardBody>
       </Card>
@@ -23,7 +23,8 @@ import {
   CardBody,
   CardInput,
   BtnAction 
-  } from '@/components/styled-components/styles.js';
+	} from '@/components/styled-components/styles.js';
+import { setState } from '@/utils/utils.js';	
 
 export default {
   name: 'end-game',
@@ -68,6 +69,8 @@ export default {
 				this.$swal('Dados Incorretos!', 'Por Favor informe seu nome', 'error');
 			} else {
 				this.saveData();
+				this.$swal('Obrigado!', 'Seus dados foram salvos com sucesso!', 'success');
+				this.$router.push('/');
 			}
 		},
 		saveData() {
@@ -75,9 +78,7 @@ export default {
 			const email = this.email;
 			const score = this.getState().score;
 			const data = { name, email, score };
-			let ranking = [];
-			ranking.push(data);
-			localStorage.setItem('ranking', JSON.stringify(ranking));
+			setState(data);
 			this.$swal('Obrigado!', 'Dados salvos com sucesso', 'success');
 		}
 	}

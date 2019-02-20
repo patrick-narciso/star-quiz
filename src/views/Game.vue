@@ -10,7 +10,7 @@
         <HeaderText size="30">starquiz!</HeaderText>
       </Header>	
       <HeaderText size="30">Tempo: 
-        <countdown v-on:onFinish="timeLeft = 0" :left-time="120000">
+        <countdown v-on:onFinish="timeLeft = 0" :left-time="1200">
           <span
             slot="process"
             slot-scope="{ timeObj }">
@@ -169,12 +169,14 @@ export default {
       this.charName = {};
     },
     isChar(name, index) {
-      if(name && name.toLowerCase() === this.charName[index].toLowerCase()) {
-        this.char.name === name && this.char.clicked ?
-          this.saveScore(this.score + 5) : this.saveScore(this.score + 10);
-        this.$swal('Você acertou!', 'Continue jogando para acertar mais', 'success');
-      } else {
-        this.$swal('Você errou!', 'Tente acertar outros personagens', 'error');
+      if(name) {
+        if(name.toLowerCase() === this.charName[index].toLowerCase()) {
+          this.char.name === name && this.char.clicked ?
+            this.saveScore(this.score + 5) : this.saveScore(this.score + 10);
+          this.$swal('Você acertou!', 'Continue jogando para acertar mais', 'success');
+        } else {
+          this.$swal('Você errou!', 'Tente acertar outros personagens', 'error');
+        }
       }
       this.removeCharFromList(index);
     },
