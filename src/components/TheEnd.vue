@@ -46,8 +46,8 @@ export default {
 		getState() {
 			return this.$store.state;
 		},
-		isEmail() {
-			const mail = this.email;
+		isEmail(userEmail) {
+			const mail = this.email || userEmail;
 			const er = new RegExp(/^[A-Za-z0-9_-]+@[A-Za-z0-9_-]{2,}[A-Za-z0-9]{2,}([A-Za-z0-9])?/);	
 			if(typeof(mail) == "string") {		
 				if(er.test(mail)) { 

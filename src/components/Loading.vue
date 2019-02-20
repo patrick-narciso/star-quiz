@@ -14,7 +14,6 @@
 </script>
 
 <style scoped lang="scss">
-@import '../styles/_keyframes';
 .loader {
   .loader__image {
     width: 200px;
