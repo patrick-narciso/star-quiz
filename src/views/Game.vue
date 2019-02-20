@@ -10,7 +10,7 @@
         <HeaderText size="30">starquiz!</HeaderText>
       </Header>	
       <HeaderText size="30">Tempo: 
-        <countdown v-on:onFinish="timeLeft = 0" :left-time="1200">
+        <countdown v-on:onFinish="timeLeft = 0" :left-time="120000">
           <span
             slot="process"
             slot-scope="{ timeObj }">
