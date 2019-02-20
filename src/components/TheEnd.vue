@@ -7,8 +7,8 @@
 					<CardText size="12">Preencha o formulário abaixo para salvar sua pontuação:</CardText>
 					<CardInput id="name" type="text" placeholder="Nome" margin="10" v-model="name"/>
 					<CardInput id="email" type="email" placeholder="E-mail" margin="10" v-model="email"/>
-          <BtnAction primary mt="10" width="186" height="56">
-            <CardText size="16" @click="validForm()">Salvar</CardText>
+          <BtnAction @click="validForm()" primary mt="10" width="186" height="56">
+            <CardText size="16">Salvar</CardText>
           </BtnAction>
         </CardBody>
       </Card>
@@ -49,7 +49,7 @@ export default {
 		},
 		isEmail(userEmail) {
 			const mail = this.email || userEmail;
-			const er = new RegExp(/^[A-Za-z0-9_-]+@[A-Za-z0-9_-]{2,}[A-Za-z0-9]{2,}([A-Za-z0-9])?/);	
+			const er = new RegExp(/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/gi);	
 			if(typeof(mail) == "string") {		
 				if(er.test(mail)) { 
 					return true; 
