@@ -22,11 +22,8 @@ import {
   CardText,
   CardBody,
   CardInput,
-	Header,
-	HeaderText, 
-  Photo, 
   BtnAction 
-  } from '@/styles/styles.js';
+  } from '@/components/styled-components/styles.js';
 
 export default {
   name: 'end-game',
@@ -51,7 +48,7 @@ export default {
 		},
 		isEmail() {
 			const mail = this.email;
-			var er = new RegExp(/^[A-Za-z0-9_\-\.]+@[A-Za-z0-9_\-\.]{2,}\.[A-Za-z0-9]{2,}(\.[A-Za-z0-9])?/);	
+			const er = new RegExp(/^[A-Za-z0-9_-]+@[A-Za-z0-9_-]{2,}[A-Za-z0-9]{2,}([A-Za-z0-9])?/);	
 			if(typeof(mail) == "string") {		
 				if(er.test(mail)) { 
 					return true; 
@@ -65,7 +62,6 @@ export default {
 			}
 		},
 		validForm() {
-			console.log('éntre');
 			if (!this.isEmail()) {
 				this.$swal('Dados Incorretos!', 'Por Favor informe um e-mail válido', 'error');
 			} else if (!this.name) {

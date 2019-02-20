@@ -56,7 +56,7 @@
         </CardBody>
       </Card>
     </Container>
-    <EndGame v-show="timeLeft === 0"/>
+    <TheEnd v-show="timeLeft === 0"/>
     <BtnAction
         v-show="timeLeft !== 0 && !loading" 
         v-on:click="previousPage()" 
@@ -89,11 +89,10 @@ import {
 	HeaderText, 
   Photo, 
   BtnAction 
-  } from '@/styles/styles.js';
+  } from '@/components/styled-components/styles.js';
 import { getChars, getDetails } from '@/api/people.js';
-import EndGame from '@/views/EndGame.vue';
+import TheEnd from '@/components/TheEnd.vue';
 import Loading from '@/components/Loading.vue';
-import axios from 'axios';
 import { mapActions } from 'vuex';
 
 export default {
@@ -114,7 +113,7 @@ export default {
     CardInput,
     Header,
     HeaderText,
-    EndGame,
+    TheEnd,
     Loading, 
     Photo, 
     BtnAction 

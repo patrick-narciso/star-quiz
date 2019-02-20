@@ -30,7 +30,7 @@ import {
   Photo, 
   CardBody, 
   CardText, 
-  BtnAction } from '@/styles/styles.js';
+  BtnAction } from '@/components/styled-components/styles.js';
 
 export default {
   name: 'home',
